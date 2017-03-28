@@ -2,7 +2,6 @@ package org.hawkular.apm.qe.experiment;
 
 import org.hawkular.apm.api.model.Property;
 import org.hawkular.apm.api.model.analytics.EndpointInfo;
-import org.hawkular.apm.api.model.analytics.Percentiles;
 import org.hawkular.apm.api.model.trace.Trace;
 import org.hawkular.apm.client.model.Criteria;
 import org.hawkular.apm.client.HawkularApmClient;
@@ -13,13 +12,12 @@ import org.hawkular.client.core.ClientResponse;
 import org.testng.annotations.Test;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 /**
  * Created by kearls on 22/03/2017.
  */
-public class SimpleTest {
+public class SimpleTest extends ApmTestBase {
 
     @Test
     public void simpleTest() throws Exception {
