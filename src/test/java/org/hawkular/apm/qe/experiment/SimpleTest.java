@@ -1,4 +1,4 @@
-package com.kevinearls.hawkularclientetsts;
+package org.hawkular.apm.qe.experiment;
 
 import org.hawkular.apm.api.model.Property;
 import org.hawkular.apm.api.model.analytics.EndpointInfo;

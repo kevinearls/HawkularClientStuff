@@ -1,4 +1,4 @@
-package com.kevinearls.hawkularclientetsts;
+package org.hawkular.apm.qe.experiment;
 
 import io.opentracing.Span;
 import io.opentracing.Tracer;
