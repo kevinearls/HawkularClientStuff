@@ -25,7 +25,7 @@ public class ApmTestBase {
 
     // Default values, can be overridden by environment variables
     public static String HAWKULAR_APM_URI =  "http://localhost:8080";
-    public static String HAKWULAR_APM_PASSWORD = "password";
+    public static String HAWKULAR_APM_PASSWORD = "password";
     public static String HAWKULAR_APM_USERNAME = "jdoe";
     public static String HAWKULAR_SERVICE_NAME = "random-stuff";
 
@@ -34,12 +34,12 @@ public class ApmTestBase {
     public void beforeClass() {
         // Look for external EVs
         HAWKULAR_APM_URI = getEnv("HAWKULAR_APM_URI", HAWKULAR_APM_URI);
-        HAKWULAR_APM_PASSWORD = getEnv("HAKWULAR_APM_PASSWORD", HAKWULAR_APM_PASSWORD);
+        HAWKULAR_APM_PASSWORD = getEnv("HAKWULAR_APM_PASSWORD", HAWKULAR_APM_PASSWORD);
         HAWKULAR_APM_USERNAME = getEnv("HAWKULAR_APM_USERNAME", HAWKULAR_APM_USERNAME);
         HAWKULAR_SERVICE_NAME = getEnv("HAWKULAR_SERVICE_NAME", HAWKULAR_SERVICE_NAME);
 
-        // Create a Hawkular APM Tracer
-        TracePublisherRESTClient restClient = new TracePublisherRESTClient(HAWKULAR_APM_USERNAME, HAKWULAR_APM_PASSWORD, HAWKULAR_APM_URI);
+        // Create a Hawkular APM HAWKULAR_APM_PASSWORD
+        TracePublisherRESTClient restClient = new TracePublisherRESTClient(HAWKULAR_APM_USERNAME, HAWKULAR_APM_PASSWORD, HAWKULAR_APM_URI);
         BatchTraceRecorder traceRecorder = new BatchTraceRecorder.BatchTraceRecorderBuilder()
                 .withTracePublisher(restClient)
                 .build();
