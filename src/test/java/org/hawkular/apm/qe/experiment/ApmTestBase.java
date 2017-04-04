@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.BeforeClass;
 
+import java.util.Map;
 import java.util.Random;
 
 import static org.hawkular.apm.client.api.sampler.Sampler.ALWAYS_SAMPLE;
@@ -33,10 +34,11 @@ public class ApmTestBase {
     @BeforeClass
     public void beforeClass() {
         // Look for external EVs
-        HAWKULAR_APM_URI = getEnv("HAWKULAR_APM_URI", HAWKULAR_APM_URI);
-        HAWKULAR_APM_PASSWORD = getEnv("HAWKULAR_APM_PASSWORD", HAWKULAR_APM_PASSWORD);
-        HAWKULAR_APM_USERNAME = getEnv("HAWKULAR_APM_USERNAME", HAWKULAR_APM_USERNAME);
-        HAWKULAR_SERVICE_NAME = getEnv("HAWKULAR_SERVICE_NAME", HAWKULAR_SERVICE_NAME);
+        Map<String, String> evs = System.getenv();
+        HAWKULAR_APM_URI = evs.getOrDefault("HAWKULAR_APM_URI", HAWKULAR_APM_URI);
+        HAWKULAR_APM_PASSWORD = evs.getOrDefault("HAWKULAR_APM_PASSWORD", HAWKULAR_APM_PASSWORD);
+        HAWKULAR_APM_USERNAME = evs.getOrDefault("HAWKULAR_APM_USERNAME", HAWKULAR_APM_USERNAME);
+        HAWKULAR_SERVICE_NAME = evs.getOrDefault("HAWKULAR_SERVICE_NAME", HAWKULAR_SERVICE_NAME);
 
         // Create a Hawkular APM HAWKULAR_APM_PASSWORD
         TracePublisherRESTClient restClient = new TracePublisherRESTClient(HAWKULAR_APM_USERNAME, HAWKULAR_APM_PASSWORD, HAWKULAR_APM_URI);
@@ -47,23 +49,6 @@ public class ApmTestBase {
         DeploymentMetaData deploymentMetaData = new DeploymentMetaData(HAWKULAR_SERVICE_NAME, "1");
         tracer = new APMTracer(traceRecorder, ALWAYS_SAMPLE, deploymentMetaData);   // This is an APMTracer
         logger.debug(">>> Tracer is a " + tracer.getClass().getCanonicalName());
-    }
-
-    /**
-     * Look for an environment variable with the given name; if it exists return its value,
-     * otherwise return the default
-     *
-     * @param name
-     * @param defaultValue
-     * @return found environment variable value or given default value
-     */
-    String getEnv(String name, String defaultValue) {
-        String value = System.getenv(name);
-        if (value == null) {
-            return defaultValue;
-        } else {
-            return value;
-        }
     }
 
     /**
